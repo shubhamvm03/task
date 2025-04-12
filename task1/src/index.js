@@ -12,6 +12,7 @@ root.render(
     {/* <App /> */}
     <Registration/>
     {/* <ProductForm/> */}
+    
   </React.StrictMode>
 );
 

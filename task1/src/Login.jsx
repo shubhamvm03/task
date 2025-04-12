@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import ProductForm from './ProductForm';
 
 export default function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const [showProductForm, setShowProductForm] = useState(false); // 🔥 switch to ProductForm
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,16 +31,18 @@ export default function Login() {
       const result = await response.json();
 
       if (response.ok) {
-        alert(' Login successful!');
-        console.log('User data:', result.user); // you can store token or user info here
+        alert('Login successful!');
+        setShowProductForm(true); // 🔥 navigate (render) to ProductForm
       } else {
-        alert('NO ' + result.message);
+        alert('Login failed: ' + result.message);
       }
     } catch (err) {
       console.error('Login error:', err);
       alert('Something went wrong during login!');
     }
   };
+
+  if (showProductForm) return <ProductForm />; // 👈 this acts like "navigation"
 
   return (
     <div style={{ maxWidth: '400px', margin: 'auto' }}>
